@@ -1,0 +1,11 @@
+db:
+  # for development mode (local db)
+  # url: "mongodb://localhost:27017"
+  # 
+  # for production mode
+  url: "mongodb+srv://jace:jace@molfar-sources.tjmxbnn.mongodb.net/?retryWrites=true&w=majority"
+  # 
+  
+  name: sources
+  
+  reportCollection: report
