@@ -1,0 +1,15 @@
+{
+  "name": "jace",
+  "short_name": "jace",
+  "icons": [
+    {
+      "src": "./img/icons/molfar.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#4DBA87"
+}
