@@ -46,7 +46,7 @@ const Builder = class {
   //       context.$log += `\n[ ${moment(new Date()).format("YYYY.MM.DD HH:mm:ss")} ]:\n${YAML.dump(command)}`
 
 		let commandName = first(keys(command))
-		
+		console.log(commandName)
 		let executor = this.#commandImplementations.filter(rule => rule.name.includes(commandName))
 		if( executor.length < 2){
 			executor = executor[0]

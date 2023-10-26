@@ -17,6 +17,12 @@ const {
 	max
 } = require("lodash")
 
+
+
+const axios = require("axios")
+const fs = require("fs")
+const fse = require("fs-extra")
+
 const { resolveValue } = require("../../utils/values")
 
 
@@ -33,7 +39,6 @@ const _ = require("lodash")
 
 const path = require("path")
 const YAML = require("js-yaml")
-const fs = require("fs")
 const loadYaml = filename => YAML.load(fs.readFileSync(path.resolve(filename)).toString().replace(/\t/gm, " "))
 const config = loadYaml(path.join(__dirname,"../../../.config/db/mongodb.conf.yml"))
 
@@ -95,14 +100,20 @@ module.exports = {
             name: ["query"],
             _execute: async (command, context) => {
 
-            	const query = buildPipeline(pluginContext, command.query)
+            	let querySource = (last(command.query).into) ? command.query.slice(0,-1) : command.query
 
-            	await mongodb.aggregate_raw({	
+            	const query = buildPipeline(pluginContext, querySource)
+
+            	let result = await mongodb.aggregate_raw({	
 	            	db: config.db,
 	            	collection: `${config.db.name}.${query.collection}`,
 	            	pipeline: query.pipeline
 	            })
 
+            	if(last(command.query).into) {
+            		set(context, last(command.query).into, result)
+                }
+            	
             	return context
             }
         },
@@ -135,6 +146,44 @@ module.exports = {
 				return context
             }	
         },
+
+        {
+        	name: ["import", "require", "use"],
+            _execute: async (command, context) => {
+            	// console.log(command)
+                command.import = command.import || command.require || command.use
+                
+                const url = command.import.url
+                const name = command.import.as 
+                const filename = command.import.from 
+                
+                const noCache = command.import.noCache
+                
+                if (url){
+					
+					name = name || "external-plugin"
+
+					if (noCache || !fse.pathExistsSync(`./report-builder/plugin-cache/${name}.js`)) {
+						let response = await axios.get(url)
+						fs.writeFileSync(path.resolve(`./report-builder/plugin-cache/${name}.js`), response.data)
+					}
+	
+					plugin = path.resolve(`./report-builder/plugin-cache/${name}.js`)
+					context[name] = require(plugin)
+	
+				} else {
+
+					plugin = path.resolve(`./report-builder/plugin-cache/${filename}.js`)
+					context[ (name || filename) ] = require(plugin)
+	
+				}
+
+				
+				return context
+            }	
+        },
+
+
         {
         	name: ["histogram", "hist"],
             _execute: async (command, context) => {
