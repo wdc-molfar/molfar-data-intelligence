@@ -169,12 +169,19 @@ module.exports = {
 					}
 	
 					plugin = path.resolve(`./report-builder/plugin-cache/${name}.js`)
+					console.log(plugin, require(plugin))
 					context[name] = require(plugin)
+
 	
 				} else {
 
 					plugin = path.resolve(`./report-builder/plugin-cache/${filename}.js`)
+					
+					console.log("import", (name || filename), plugin, require(plugin))
+					// context[name] = require(plugin)
+					
 					context[ (name || filename) ] = require(plugin)
+					console.log(context[ (name || filename) ])
 	
 				}
 
