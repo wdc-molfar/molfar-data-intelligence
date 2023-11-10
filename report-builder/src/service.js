@@ -65,38 +65,39 @@ const buildReport = async (req, res) => {
 		}
 
 
-		if( 
-			   expiration.size <= 0	
-			|| mode == "force" 
-			|| moment(new Date()).diff(reportData.cachedAt, expiration.unit) >= expiration.size
-			|| !reportData.cache
-			|| reportData.cache._error
-		){
+		// if( 
+		// 	   expiration.size <= 0	
+		// 	|| mode == "force" 
+		// 	|| moment(new Date()).diff(reportData.cachedAt, expiration.unit) >= expiration.size
+		// 	|| !reportData.cache
+		// 	|| reportData.cache._error
+		// ){
 			
 			builder = new Builder()
 			const result = await builder.execute(reportData.data, { reportId, $request })
-			reportData.cache = JSON.stringify(
-				{
-					_log: result._log,
-					_error: result._error,
-					_publish: result._publish
-				}
-			)	
+			// reportData.cache = JSON.stringify(
+			// 	{
+			// 		_log: result._log,
+			// 		_error: result._error,
+			// 		_publish: result._publish
+			// 	}
+			// )	
 			
-			reportData.cachedAt = new Date()
+			// reportData.cachedAt = new Date()
 			
-			await mongodb.replaceOne({
-				db: config.db,
-				collection: `${config.db.name}.${config.db.reportCollection}`,
-				filter:{ id: reportData.id},
-				data: reportData
-			})
+		// 	await mongodb.replaceOne({
+		// 		db: config.db,
+		// 		collection: `${config.db.name}.${config.db.reportCollection}`,
+		// 		filter:{ id: reportData.id},
+		// 		data: reportData
+		// 	})
 
-			console.log(`${moment(reportData.cachedAt).format("MMM DD YYYY HH:mm:ss")} Report ${reportData.name} cached`)
+		// 	console.log(`${moment(reportData.cachedAt).format("MMM DD YYYY HH:mm:ss")} Report ${reportData.name} cached`)
 
-		}
+		// }
 		
-		res.send(JSON.parse(reportData.cache))
+		// res.send(JSON.parse(reportData.cache))
+		res.send(result)
 
 	} else {
 		res.send({error: "Not found"})

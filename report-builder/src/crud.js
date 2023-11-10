@@ -102,16 +102,16 @@ const updateReport = async (req, res) => {
 		
 		let report = req.body.options.report
 
-		builder = new Builder()
-		const cachedContent = await builder.execute(report.data, {reportId: report.id})
-		report.cache = JSON.stringify(
-			{
-				_log: cachedContent._log,
-				_error: cachedContent._error,
-				_publish: cachedContent._publish
-			}
-		)	
-		report.cachedAt = new Date()
+		// builder = new Builder()
+		// const cachedContent = await builder.execute(report.data, {reportId: report.id})
+		// report.cache = JSON.stringify(
+		// 	{
+		// 		_log: cachedContent._log,
+		// 		_error: cachedContent._error,
+		// 		_publish: cachedContent._publish
+		// 	}
+		// )	
+		// report.cachedAt = new Date()
 			
 		// console.log("save report", report)
 
