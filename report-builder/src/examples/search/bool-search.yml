@@ -1,0 +1,17 @@
+- search:
+    from: messages
+    into: test
+    select:
+       query: 
+          bool:
+             must: 
+              - "scraper.message.text:corruption"
+             must_not:
+              - "scraper.message.text:Navalny" 
+       fields:
+          - id
+          - scraper.message.text
+          - scraper.message.md5
+       # offset: 1
+       # limit: 1
+  

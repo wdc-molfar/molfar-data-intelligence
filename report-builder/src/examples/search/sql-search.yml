@@ -1,0 +1,13 @@
+#######################################################################
+# https://solr.apache.org/guide/solr/latest/query-guide/sql-query.html
+#######################################################################
+
+- search:
+    from: messages
+    into: test
+    sql: >
+      SELECT id, `scraper.message.text` as text, `scraper.message.md5` as md5
+      FROM messages
+      WHERE id = '9bc6dedc-e635-4bd3-a5ac-15af93bcb175'
+      LIMIT 1 
+  

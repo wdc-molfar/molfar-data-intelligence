@@ -1,0 +1,12 @@
+- search:
+    from: messages
+    into: test
+    select:
+       query: "scraper.message.text:corruption"
+       fields:
+          - id
+          - scraper.message.text
+          - scraper.message.md5
+       offset: 1
+       limit: 1
+  

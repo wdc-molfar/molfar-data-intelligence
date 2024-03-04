@@ -1,0 +1,61 @@
+########################################################################################
+
+- context:
+
+  - value:
+      into: fields
+      transform: >
+        () => ["id", "scraper.message.text", "scraper.message.md5"]
+
+  - value:
+      into: query
+      transform: >
+        () => ({
+            bool: {
+              must: ["scraper.message.text:corruption"],
+              must_not: ["scraper.message.text:Navalny"]
+            }
+          })      
+
+  - value:
+      into: collection
+      transform: >
+        () => "messages"    
+
+#######################################################################################
+
+- search:
+    from:
+      $: collection
+    into: test
+    select:
+       query: 
+        $: query 
+       fields:
+        $: fields
+       params: 
+          "hl": true
+          "hl.fl": "scraper.message.text"
+          "hl.simple.pre": "<b>"
+          "hl.simple.post": "</b>"
+          "hl.fragsize": 0
+        
+  
+
+# - search:
+#     from: messages
+#     into: test
+#     select:
+#        query: 
+#           bool:
+#              must: 
+#               - "scraper.message.text:corruption"
+#              must_not:
+#               - "scraper.message.text:Navalny" 
+#        fields:
+#           - id
+#           - scraper.message.text
+#           - scraper.message.md5
+       # offset: 1
+       # limit: 1
+  

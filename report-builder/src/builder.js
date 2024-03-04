@@ -5,6 +5,8 @@ const { resolveCommand } = require("./utils/values")
 
 const publishPlugin = require("./plugins/publish/publish-plugin")
 const queryPlugin = require("./plugins/query/query-plugin")
+const searchPlugin = require("./plugins/search/search-plugin")
+
 const logPlugin = require("./plugins/publish/log-plugin")
 
 
@@ -20,6 +22,7 @@ const Builder = class {
 		this.use([
 			publishPlugin,
 			queryPlugin,
+			searchPlugin,
 			logPlugin
 		])
 	}

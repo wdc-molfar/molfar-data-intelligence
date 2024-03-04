@@ -1,0 +1,30 @@
+########################################################################################
+
+- context:
+
+  - value:
+      into: fields
+      transform: >
+        () => ["id", "scraper.message.text", "scraper.message.md5"]
+
+  - value:
+      into: collection
+      transform: >
+        () => "messages"    
+
+#######################################################################################
+
+- search:
+    from:
+      $: collection
+    into: test
+    select:
+       query: 
+        custom: 
+          $in:
+            field: id
+            values:
+              - 9bc6dedc-e635-4bd3-a5ac-15af93bcb175
+              - 2b446b12-df4f-4385-a451-8f3683c849cc 
+       fields:
+        $: fields

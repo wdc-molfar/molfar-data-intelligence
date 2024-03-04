@@ -1,0 +1,4 @@
+db:
+  baseURL: "http://localhost:8983/solr"
+  defaultCollection: messages
+  
