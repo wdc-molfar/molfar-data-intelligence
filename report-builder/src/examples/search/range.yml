@@ -1,0 +1,16 @@
+- search:
+    from: messages
+    into: test
+    select:
+       # query: "scraper.message.text:corruption"
+       query: "scraper.message.text:corrupt~ AND scrapedAt:{2024-01-20T09:24:04.368Z TO 2024-01-21T09:24:05.185Z}"
+       fields:
+          - id
+          - scraper.message.text
+          - scraper.message.md5
+          - scrapedAt
+       # offset: 0
+       # limit: 3
+       sort: "scrapedAt desc"
+  
+ 

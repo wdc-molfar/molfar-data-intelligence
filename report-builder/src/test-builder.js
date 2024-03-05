@@ -8,7 +8,7 @@ const loadYaml = filename => YAML.load(fs.readFileSync(path.resolve(filename)).t
 const test = async script => {
 	builder = new Builder()
 	const result = await builder.execute(script, {})
-	console.log(result)
+	console.log(JSON.stringify(result, null, " "))
 	// console.log(JSON.stringify(result, null, " "))
 }
 

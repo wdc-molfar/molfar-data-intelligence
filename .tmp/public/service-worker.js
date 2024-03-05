@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.4e4909382cb6bbd4e0d9a77f4f827d38.js"
+  "/precache-manifest.0c9c5d397a6bc6fab1f5c4c8b09c602e.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "front-end"});
@@ -28,6 +28,6 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerRoute(/http:\/\/localhost:8080\//, workbox.strategies.networkFirst(), 'GET');
-workbox.routing.registerRoute(/http:\/\/localhost:8080\/design*/, workbox.strategies.networkFirst(), 'GET');
-workbox.routing.registerRoute(/http:\/\/localhost:8080\/api*/, workbox.strategies.networkFirst(), 'GET');
+workbox.routing.registerRoute(/http:\/\/localhost:3000\//, workbox.strategies.networkFirst(), 'GET');
+workbox.routing.registerRoute(/http:\/\/localhost:3000\/design*/, workbox.strategies.networkFirst(), 'GET');
+workbox.routing.registerRoute(/http:\/\/localhost:3000\/api*/, workbox.strategies.networkFirst(), 'GET');
