@@ -2,10 +2,21 @@ const mongo = require('mongodb').MongoClient
 
 const normalize = str => {
 	const d = str.split(".")
-	return {
-		dbName: d[0],
-		collectionName: d[1]
+	if(d.length == 1){
+	
+		return {
+			collectionName: d[0]	
+		}
+	
+	} else {
+	
+		return {
+			dbName: d[0],
+			collectionName: d[1]
+		}
+			
 	}
+	
 }	
 
 

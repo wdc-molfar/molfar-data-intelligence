@@ -4,7 +4,7 @@ const path = require("path")
 const YAML = require("js-yaml")
 const loadYaml = filename => YAML.load(fs.readFileSync(path.resolve(filename)).toString().replace(/\t/gm, " "))
 const config = loadYaml(path.join(__dirname,"../../../.config/db/solr.conf.yml"))
-const { extend, set } = require("lodash")
+const { extend, set, keys } = require("lodash")
 const axios = require("axios")
 
 const normalize = request => {
@@ -32,6 +32,14 @@ const normalize = request => {
 
 }
 
+
+const zipProperties = data => {
+	let res = {}
+	keys(data).forEach( key => {
+		set(res, key, data[key])
+	})
+}
+
 module.exports = {
 
     register: builder => {
@@ -53,7 +61,7 @@ module.exports = {
             	let result
 
             	let collection = command.search.from || config.db.defaultCollection
-            	axios.defaults.baseURL = config.db.baseURL 
+            	axios.defaults.baseURL = (command.search.on) ? command.search.on : config.db.baseURL 
 	            	
             	if(command.search.select){
 	            	let query = command.search.select || {

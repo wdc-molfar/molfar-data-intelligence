@@ -2,6 +2,7 @@ const UUID = require("uuid").v4
 const { last, template, templateSettings, extend, isArray, get } = require("lodash")
 const { resolveValue } = require("../../utils/values")
 const uuid = () => last(UUID().split("-"))
+const $convert = require("../../utils/transform")
 
 let compile = (_template, context) => {
 

@@ -1,4 +1,5 @@
 const moment = require("moment")
+const $convert = require("../../utils/transform")
 
 module.exports = {
 
@@ -18,7 +19,7 @@ module.exports = {
                 let result = ""
                 
                 if(command.log.eval){
-                    result = eval(command.log.eval)(context)
+                    result = await eval(command.log.eval)(context)
                 } else {
                     result = command.log
                 }

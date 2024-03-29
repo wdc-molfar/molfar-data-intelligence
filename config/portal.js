@@ -17,7 +17,9 @@ module.exports = {
         useLog: true,
         
         db: {
-            uri: process.env.MONGO_URI || "mongodb://localhost:27017/dj-portal" 
+            // uri: process.env.MONGO_URI || "mongodb+srv://jace:jace@cluster0.3hhdg.mongodb.net/dj-portal?retryWrites=true&w=majority"//"mongodb://localhost:27017/dj-portal" 
+          uri: process.env.MONGO_URI || "mongodb://adminuser:password123@10.6.12.73:32000/dj-portal?authSource=admin&readPreference=primary&directConnection=true&ssl=false"//"mongodb://localhost:27017/dj-portal" 
+              
         },
 
         plugins: {

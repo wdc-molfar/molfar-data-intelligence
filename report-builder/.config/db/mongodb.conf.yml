@@ -3,9 +3,10 @@ db:
   # url: "mongodb://localhost:27017"
   # 
   # for production mode
-  url: "mongodb+srv://jace:jace@molfar-sources.tjmxbnn.mongodb.net/?retryWrites=true&w=majority"
+  # url: "mongodb+srv://jace:jace@molfar-sources.tjmxbnn.mongodb.net/?retryWrites=true&w=majority"
   # 
-  
+  url: mongodb://adminuser:password123@10.6.12.73:32000/dj-portal?authSource=admin&readPreference=primary&directConnection=true&ssl=false
+
   name: sources
   
   reportCollection: report
