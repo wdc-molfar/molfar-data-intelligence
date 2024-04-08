@@ -163,9 +163,10 @@ module.exports = {
     commands: [
 
         {
-            name: ["query"],
+            name: ["query", "mongo.query"],
             _execute: async (command, context) => {
 
+            	command.query = command["mongo.query"] || command.query
             	let db = config.db
             	db.url = (first(command.query).on) ? first(command.query).on : db.url
 	
